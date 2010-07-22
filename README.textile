@@ -22,19 +22,46 @@ h3. HTML
 
 h3. JavaScript
 
+First you'll need to setup your Google map:
+
 <pre>
   <code>
+  // Map options
+  var latlng = new google.maps.LatLng(60.215084, 24.972961);
+  var options = {
+    zoom: 11,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    mapTypeControl: false,
+    navigationControl: true,
+    navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL} // ZOOM_PAN
+  }
+
   // The Google map
   var map = new google.maps.Map(document.getElementById("map"), options);
 
+  // Invisible code that adds markers
+  ...
+  </code>
+</pre>
+
+With the map setup you're ready to attach the tooltip to the markers and to define callbacks that define what happens when the tooltip is shown:
+
+<pre>
+  <code>
   // Called right before tooltip is displayed
   var before_show = function(marker, tooltip) {
       // Set tooltip contents to the marker's title
-      // NOTE you could also attach JSON data to a marker and create more complex tooltips
       tooltip.html(marker.title);
+
+      // NOTE you could also attach JSON objects to a marker and 
+      // create more complex tooltips that save the world from evil politicians
+      tooltip.children('.thumbnail').attr('src', marker.product.thumbnail_url);
+
       // NOTE you can also change the marker's icon
       marker.setIcon('/images/hover.png');
   };
+
   // Called right before tooltip is hidden
   var before_hide = function(marker, tooltip) {
     marker.setIcon('/images/normal.png');
@@ -44,7 +71,7 @@ h3. JavaScript
   var tooltip = new MapTooltip(map, $('#map-tooltip'), before_show, before_hide);
 
   // Attach tooltip to marker, see http://code.google.com/intl/sv-SE/apis/maps/documentation/v3/reference.html#Marker
-  tooltip.addMarker(marker); // 
+  tooltip.addMarker(marker); // markers are usually loaded from a database
   </code>
 </pre>
 

@@ -30,7 +30,7 @@ function MapTooltip(map, tip, onBeforeShow, onBeforeHide) {
   //
   function get_overlay(map) {
     function ProjectionHelperOverlay(map) {
-      this.set_map(map);
+      this.setMap(map);
     }
 
     ProjectionHelperOverlay.prototype = new google.maps.OverlayView();
