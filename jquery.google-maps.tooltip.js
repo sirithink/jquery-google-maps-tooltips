@@ -63,8 +63,8 @@ function MapTooltip(map, tip, onBeforeShow, onBeforeHide) {
 
     // Map world relative to map container
     // TODO This needs to be configurable and more exact
-    var p = overlay.get_projection().fromLatLngToDivPixel(marker.get_position());
-    var dragObject = overlay.get_panes().mapPane.parentNode;
+    var p = overlay.getProjection().fromLatLngToDivPixel(marker.getPosition());
+    var dragObject = overlay.getPanes().mapPane.parentNode;
     var x = p.x + $tooltip.width(); // + parseInt(dragObject.style.left);
     var y = p.y + $tooltip.height() / 2; // + parseInt(dragObject.style.top);
 
